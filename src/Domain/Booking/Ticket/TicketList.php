@@ -5,17 +5,17 @@ namespace App\Domain\Booking\Ticket;
 use App\Domain\Booking\Ticket\ValueObject\Film;
 use Iterator;
 
-class TicketList implements Iterator
+final class TicketList implements Iterator
 {
     /** @var array<Ticket> */
     private array $tickets;
 
     private int $pointer = 0;
 
-    public function createTicketList(int $countOfTickets, Film $film, mixed $date, mixed $time): void
+    public function createTicketList(int $countOfTickets, Film $film, \DateTime $dateTimeStart, \DateTime $dateTimeEnd): void
     {
         for ($i = 0; $i < $countOfTickets; $i++) {
-            $this->tickets[] = new Ticket($i, $film, $date, $time);
+            $this->tickets[] = new Ticket($i, $film, $dateTimeStart, $dateTimeEnd);
         }
     }
 

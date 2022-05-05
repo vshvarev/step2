@@ -2,19 +2,13 @@
 
 namespace App\Domain\Booking\Ticket\ValueObject;
 
-class Client
+final class Client
 {
     public function __construct(
         private string $name,
         private string $phoneNumber,
     ) {
-        $phoneNumber = $this->validatePhoneNumber($phoneNumber);
-        $this->phoneNumber = $phoneNumber;
-    }
-
-    private function validatePhoneNumber(string $phoneNumber): string
-    {
-        return $phoneNumber;
+        $this->phoneNumber = self::validatePhoneNumber($phoneNumber);
     }
 
     private function getName(): string
@@ -25,5 +19,16 @@ class Client
     private function getPhoneNumber(): string
     {
         return $this->phoneNumber;
+    }
+
+    private static function validatePhoneNumber(string $phoneNumber): string
+    {
+        $regexpCorrectNumber = '/^\s?(\+\s?7|8)([- ()]*\d){10}$/';
+
+        if (preg_match($regexpCorrectNumber, $phoneNumber)) {
+            return $phoneNumber;
+        }
+
+        return '----------';
     }
 }

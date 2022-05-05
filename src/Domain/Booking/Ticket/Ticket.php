@@ -4,16 +4,17 @@ namespace App\Domain\Booking\Ticket;
 
 use App\Domain\Booking\Ticket\ValueObject\Client;
 use App\Domain\Booking\Ticket\ValueObject\Film;
+use DateTime;
 
-class Ticket
+final class Ticket
 {
     private Client $client;
 
     public function __construct(
         private int $id,
         private Film $film,
-        private mixed $date,
-        private mixed $time,
+        private DateTime $dateTimeStart,
+        private DateTime $dateTimeEnd,
     ) {}
 
     public function bookTicket(Client $client): void
@@ -26,18 +27,23 @@ class Ticket
         return $this->film;
     }
 
-    private function getDate(): mixed
+    private function getDateTimeStart(): DateTime
     {
-        return $this->date;
+        return $this->dateTimeStart;
     }
 
-    private function getTime(): mixed
+    private function getDateTimeEnd(): DateTime
     {
-        return $this->time;
+        return $this->dateTimeEnd;
     }
 
     private function getId(): int
     {
         return $this->id;
+    }
+
+    private function getClient(): Client
+    {
+        return $this->client;
     }
 }
