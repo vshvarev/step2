@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Booking\Ticket\ValueObject;
+namespace App\Domain\Booking\ValueObjects;
 
 final class Client
 {

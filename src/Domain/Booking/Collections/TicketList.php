@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Domain\Booking\Ticket;
+namespace App\Domain\Booking\Collections;
 
-use App\Domain\Booking\Ticket\ValueObject\Film;
+use App\Domain\Booking\Entities\Film;
+use App\Domain\Booking\Entities\Ticket;
 use Iterator;
 
 final class TicketList implements Iterator

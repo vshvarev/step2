@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Domain\Booking\FilmShow\MovieSession;
-use App\Domain\Booking\Ticket\ValueObject\Client;
-use App\Domain\Booking\Ticket\ValueObject\Film;
+use App\Domain\Booking\Aggregates\MovieSession;
+use App\Domain\Booking\Entities\Film;
+use App\Domain\Booking\ValueObjects\Client;
 
 $film = new Film('Batman', 173);
 

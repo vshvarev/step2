@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Booking\FilmShow;
+namespace App\Domain\Booking\Aggregates;
 
-use App\Domain\Booking\Ticket\TicketList;
-use App\Domain\Booking\Ticket\ValueObject\Client;
-use App\Domain\Booking\Ticket\ValueObject\Film;
+use App\Domain\Booking\Collections\TicketList;
+use App\Domain\Booking\Entities\Film;
+use App\Domain\Booking\ValueObjects\Client;
 use DateTime;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

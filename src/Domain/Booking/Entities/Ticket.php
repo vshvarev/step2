@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Domain\Booking\Ticket;
+namespace App\Domain\Booking\Entities;
 
-use App\Domain\Booking\Ticket\ValueObject\Client;
-use App\Domain\Booking\Ticket\ValueObject\Film;
+use App\Domain\Booking\ValueObjects\Client;
 use DateTime;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
