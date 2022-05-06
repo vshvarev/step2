@@ -15,7 +15,7 @@ final class TicketList implements Iterator
     public function createTicketList(int $countOfTickets, Film $film, \DateTime $dateTimeStart, \DateTime $dateTimeEnd): void
     {
         for ($i = 0; $i < $countOfTickets; $i++) {
-            $this->tickets[] = new Ticket($i, $film, $dateTimeStart, $dateTimeEnd);
+            $this->tickets[] = new Ticket($film, $dateTimeStart, $dateTimeEnd);
         }
     }
 

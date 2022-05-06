@@ -6,9 +6,12 @@ use App\Domain\Booking\Ticket\TicketList;
 use App\Domain\Booking\Ticket\ValueObject\Client;
 use App\Domain\Booking\Ticket\ValueObject\Film;
 use DateTime;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 final class MovieSession
 {
+    private UuidInterface $id;
     private DateTime $dateTimeStart;
     private DateTime $dateTimeEnd;
     private TicketList $tickets;
@@ -16,9 +19,10 @@ final class MovieSession
     private int $countOfRemainingTickets = 0;
 
     public function __construct(
-        private int $id,
         private Film $film,
-    ) {}
+    ) {
+        $this->id = Uuid::uuid4();
+    }
 
     public function createTickers(int $countOfTickets): void
     {
