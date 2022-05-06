@@ -4,7 +4,7 @@ namespace App\Domain\Booking\Collections;
 
 use App\Domain\Booking\Entities\Film;
 use App\Domain\Booking\Entities\Ticket;
-use DateTime;
+use DateTimeInterface;
 use Iterator;
 
 final class TicketList implements Iterator
@@ -14,7 +14,7 @@ final class TicketList implements Iterator
 
     private int $pointer = 0;
 
-    public function createTicketList(int $countOfTickets, Film $film, DateTime $dateTimeStart, DateTime $dateTimeEnd): void
+    public function createTicketList(int $countOfTickets, Film $film, DateTimeInterface $dateTimeStart, DateTimeInterface $dateTimeEnd): void
     {
         for ($i = 0; $i < $countOfTickets; $i++) {
             $this->tickets[] = new Ticket($film, $dateTimeStart, $dateTimeEnd);

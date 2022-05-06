@@ -6,14 +6,15 @@ use App\Domain\Booking\Collections\TicketList;
 use App\Domain\Booking\Entities\Film;
 use App\Domain\Booking\ValueObjects\Client;
 use DateTime;
+use DateTimeInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 final class MovieSession
 {
     private UuidInterface $id;
-    private DateTime $dateTimeStartMovieSession;
-    private DateTime $dateTimeEndMovieSession;
+    private DateTimeInterface $dateTimeStartMovieSession;
+    private DateTimeInterface $dateTimeEndMovieSession;
     private TicketList $tickets;
     private int $countOfRemainingTickets = 0;
 

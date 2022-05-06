@@ -3,7 +3,7 @@
 namespace App\Domain\Booking\Entities;
 
 use App\Domain\Booking\ValueObjects\Client;
-use DateTime;
+use DateTimeInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -14,8 +14,8 @@ final class Ticket
 
     public function __construct(
         private Film $film,
-        private DateTime $dateTimeStart,
-        private DateTime $dateTimeEnd,
+        private DateTimeInterface $dateTimeStart,
+        private DateTimeInterface $dateTimeEnd,
     ) {
         $this->id = Uuid::uuid4();
     }
