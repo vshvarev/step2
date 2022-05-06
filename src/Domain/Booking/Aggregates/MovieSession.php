@@ -36,7 +36,10 @@ final class MovieSession
         $this->countOfTickets--;
     }
 
-    /** @return array<mixed> */
+    /** @return array<mixed>
+     *
+     * @todo method for test
+     */
     public function getInfoAboutFilmShow(): array
     {
         return [
