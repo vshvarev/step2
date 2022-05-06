@@ -12,23 +12,26 @@ use Ramsey\Uuid\UuidInterface;
 final class MovieSession
 {
     private UuidInterface $id;
-    private DateTime $dateTimeStart;
-    private DateTime $dateTimeEnd;
+    private DateTime $dateTimeStartMovieSession;
+    private DateTime $dateTimeEndMovieSession;
     private TicketList $tickets;
-    private int $countOfTickets;
     private int $countOfRemainingTickets = 0;
 
     public function __construct(
         private Film $film,
+        private string $dateTime,
+        private int $countOfTickets,
     ) {
         $this->id = Uuid::uuid4();
+        $this->setDateAndTime($this->dateTime);
+        $this->createTickers($this->countOfTickets);
     }
 
     public function createTickers(int $countOfTickets): void
     {
         $ticketList = new TicketList();
 
-        $ticketList->createTicketList($countOfTickets, $this->film, $this->dateTimeStart, $this->dateTimeEnd);
+        $ticketList->createTicketList($countOfTickets, $this->film, $this->dateTimeStartMovieSession, $this->dateTimeEndMovieSession);
         $this->tickets = $ticketList;
         $this->countOfTickets = $countOfTickets;
         $this->countOfRemainingTickets = $countOfTickets;
@@ -51,10 +54,10 @@ final class MovieSession
     {
         return [
             'Название фильма' => $this->film->getName(),
-            'Дата' => $this->dateTimeStart->format('d F Y'),
-            'Время начала сеанса' => $this->dateTimeStart->format('H:i'),
+            'Дата' => $this->dateTimeStartMovieSession->format('d F Y'),
+            'Время начала сеанса' => $this->dateTimeStartMovieSession->format('H:i'),
             'Продолжительность фильма' => $this->getDuration(),
-            'Время окончания сеанса' => $this->dateTimeEnd->format('H:i'),
+            'Время окончания сеанса' => $this->dateTimeEndMovieSession->format('H:i'),
             'Количество свободных мест' => $this->countOfRemainingTickets,
         ];
     }
@@ -70,10 +73,10 @@ final class MovieSession
 
     public function setDateAndTime(string $dateTime): void
     {
-        $this->dateTimeStart = new DateTime($dateTime);
-        $this->dateTimeEnd = new DateTime($dateTime);
+        $this->dateTimeStartMovieSession = new DateTime($dateTime);
+        $this->dateTimeEndMovieSession = new DateTime($dateTime);
         $minutesToAdd = $this->film->getDuration();
-        $this->dateTimeEnd->modify("+{$minutesToAdd} minutes");
+        $this->dateTimeEndMovieSession->modify("+{$minutesToAdd} minutes");
     }
 
     private function ticketsSoldOut(): bool

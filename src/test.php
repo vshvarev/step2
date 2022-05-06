@@ -8,10 +8,7 @@ use App\Domain\Booking\ValueObjects\Client;
 
 $film = new Film('Batman', 173);
 
-$filmShow1 = new MovieSession($film);
-
-$filmShow1->setDateAndTime('2022-05-10 20:00');
-$filmShow1->createTickers(10);
+$filmShow1 = new MovieSession($film, '2022-05-10 20:00', 10);
 
 $client1 = new Client('Vitaliy', '89082222222');
 $client2 = new Client('Nastya', '89087777777');
