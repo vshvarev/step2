@@ -14,7 +14,6 @@ final class MovieSession
 {
     private UuidInterface $id;
     private DateTimeInterface $dateTimeStartMovieSession;
-    private DateTimeInterface $dateTimeEndMovieSession;
     private TicketList $tickets;
 
     public function __construct(
@@ -23,7 +22,7 @@ final class MovieSession
         private int $countOfTickets,
     ) {
         $this->id = Uuid::uuid4();
-        $this->setDateAndTime($this->dateTime);
+        $this->dateTimeStartMovieSession = new DateTime($dateTime);
         $this->tickets = new TicketList();
     }
 
@@ -33,7 +32,7 @@ final class MovieSession
             return;
         }
 
-        $this->tickets->addTicket($this->film, $client, $this->dateTimeStartMovieSession, $this->dateTimeEndMovieSession);
+        $this->tickets->addTicket($this->film, $client, $this->dateTimeStartMovieSession, $this->getDateTimeEndMovieSession());
         $this->countOfTickets--;
     }
 
@@ -45,7 +44,7 @@ final class MovieSession
             'Дата' => $this->dateTimeStartMovieSession->format('d F Y'),
             'Время начала сеанса' => $this->dateTimeStartMovieSession->format('H:i'),
             'Продолжительность фильма' => $this->getDuration(),
-            'Время окончания сеанса' => $this->dateTimeEndMovieSession->format('H:i'),
+            'Время окончания сеанса' => $this->getDateTimeEndMovieSession()->format('H:i'),
             'Количество свободных мест' => $this->countOfTickets,
         ];
     }
@@ -59,12 +58,13 @@ final class MovieSession
         return ['hours' => $hours, 'minutes' => $minutes];
     }
 
-    public function setDateAndTime(string $dateTime): void
+    public function getDateTimeEndMovieSession(): DateTimeInterface
     {
-        $this->dateTimeStartMovieSession = new DateTime($dateTime);
-        $this->dateTimeEndMovieSession = new DateTime($dateTime);
+        $dateTimeEndMovieSession = new DateTime($this->dateTime);
         $minutesToAdd = $this->film->getDuration();
-        $this->dateTimeEndMovieSession->modify("+{$minutesToAdd} minutes");
+        $dateTimeEndMovieSession->modify("+{$minutesToAdd} minutes");
+
+        return $dateTimeEndMovieSession;
     }
 
     private function ticketsSoldOut(): bool
