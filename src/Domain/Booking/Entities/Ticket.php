@@ -9,10 +9,10 @@ use Ramsey\Uuid\UuidInterface;
 final class Ticket
 {
     private UuidInterface $id;
-    private Client $client;
 
     public function __construct(
         private Film $film,
+        private Client $client,
         private DateTimeInterface $dateTimeStart,
         private DateTimeInterface $dateTimeEnd,
     ) {

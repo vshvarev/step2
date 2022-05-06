@@ -16,7 +16,6 @@ final class MovieSession
     private DateTimeInterface $dateTimeStartMovieSession;
     private DateTimeInterface $dateTimeEndMovieSession;
     private TicketList $tickets;
-    private int $countOfRemainingTickets = 0;
 
     public function __construct(
         private Film $film,
@@ -25,17 +24,7 @@ final class MovieSession
     ) {
         $this->id = Uuid::uuid4();
         $this->setDateAndTime($this->dateTime);
-        $this->createTickers($this->countOfTickets);
-    }
-
-    public function createTickers(int $countOfTickets): void
-    {
-        $ticketList = new TicketList();
-
-        $ticketList->createTicketList($countOfTickets, $this->film, $this->dateTimeStartMovieSession, $this->dateTimeEndMovieSession);
-        $this->tickets = $ticketList;
-        $this->countOfTickets = $countOfTickets;
-        $this->countOfRemainingTickets = $countOfTickets;
+        $this->tickets = new TicketList();
     }
 
     public function bookTicket(Client $client): void
@@ -44,10 +33,8 @@ final class MovieSession
             return;
         }
 
-        $ticket = $this->tickets->current();
-        $ticket->bookTicket($client);
-        $this->tickets->next();
-        $this->countOfRemainingTickets--;
+        $this->tickets->addTicket($this->film, $client, $this->dateTimeStartMovieSession, $this->dateTimeEndMovieSession);
+        $this->countOfTickets--;
     }
 
     /** @return array<mixed> */
@@ -59,7 +46,7 @@ final class MovieSession
             'Время начала сеанса' => $this->dateTimeStartMovieSession->format('H:i'),
             'Продолжительность фильма' => $this->getDuration(),
             'Время окончания сеанса' => $this->dateTimeEndMovieSession->format('H:i'),
-            'Количество свободных мест' => $this->countOfRemainingTickets,
+            'Количество свободных мест' => $this->countOfTickets,
         ];
     }
 
@@ -82,6 +69,6 @@ final class MovieSession
 
     private function ticketsSoldOut(): bool
     {
-        return $this->countOfRemainingTickets <= 0;
+        return $this->countOfTickets <= 0;
     }
 }

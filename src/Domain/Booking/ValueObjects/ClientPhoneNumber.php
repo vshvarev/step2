@@ -2,23 +2,12 @@
 
 namespace App\Domain\Booking\ValueObjects;
 
-final class Client
+class ClientPhoneNumber
 {
     public function __construct(
-        private string $name,
         private string $phoneNumber,
     ) {
-        $this->phoneNumber = self::validatePhoneNumber($phoneNumber);
-    }
-
-    private function getName(): string
-    {
-        return $this->name;
-    }
-
-    private function getPhoneNumber(): string
-    {
-        return $this->phoneNumber;
+        $this->phoneNumber = self::validatePhoneNumber($this->phoneNumber);
     }
 
     private static function validatePhoneNumber(string $phoneNumber): string
