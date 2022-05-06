@@ -37,13 +37,9 @@ final class MovieSession
         $this->countOfTickets--;
     }
 
-    /** @return array<int> */
-    public function getDuration(): array
+    public function addTickets(int $countOfTickets): void
     {
-        $hours = intdiv($this->film->getDuration(), 60);
-        $minutes = $this->film->getDuration() % 60;
-
-        return ['hours' => $hours, 'minutes' => $minutes];
+        $this->countOfTickets += $countOfTickets;
     }
 
     public function getDateTimeEndMovieSession(): DateTimeInterface
@@ -69,6 +65,15 @@ final class MovieSession
             'Время окончания сеанса' => $this->getDateTimeEndMovieSession()->format('H:i'),
             'Количество свободных мест' => $this->countOfTickets,
         ];
+    }
+
+    /** @return array<int> */
+    public function getDuration(): array
+    {
+        $hours = intdiv($this->film->getDuration(), 60);
+        $minutes = $this->film->getDuration() % 60;
+
+        return ['hours' => $hours, 'minutes' => $minutes];
     }
 
     private function ticketsSoldOut(): bool
