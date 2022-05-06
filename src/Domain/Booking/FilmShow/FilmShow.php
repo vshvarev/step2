@@ -76,14 +76,4 @@ final class FilmShow
     {
         return $this->countOfRemainingTickets <= 0;
     }
-
-    private function getId(): int
-    {
-        return $this->id;
-    }
-
-    private function getCountOfTickets(): int
-    {
-        return $this->countOfTickets;
-    }
 }

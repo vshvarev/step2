@@ -21,29 +21,4 @@ final class Ticket
     {
         $this->client = $client;
     }
-
-    private function getFilm(): Film
-    {
-        return $this->film;
-    }
-
-    private function getDateTimeStart(): DateTime
-    {
-        return $this->dateTimeStart;
-    }
-
-    private function getDateTimeEnd(): DateTime
-    {
-        return $this->dateTimeEnd;
-    }
-
-    private function getId(): int
-    {
-        return $this->id;
-    }
-
-    private function getClient(): Client
-    {
-        return $this->client;
-    }
 }
