@@ -7,6 +7,7 @@ use App\Domain\Booking\Entities\Client;
 use App\Domain\Booking\Entities\Film;
 use DateTime;
 use DateTimeInterface;
+use Exception;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -29,27 +30,11 @@ final class MovieSession
     public function bookTicket(Client $client): void
     {
         if ($this->ticketsSoldOut()) {
-            return;
+            throw new Exception('Билеты закончились');
         }
 
-        $this->tickets->addTicket($this, $client, $this->dateTimeStartMovieSession, $this->getDateTimeEndMovieSession());
+        $this->tickets->soldTicket($this, $client, $this->dateTimeStartMovieSession, $this->getDateTimeEndMovieSession());
         $this->countOfTickets--;
-    }
-
-    /** @return array<mixed>
-     *
-     * @todo method for test
-     */
-    public function getInfoAboutFilmShow(): array
-    {
-        return [
-            'Название фильма' => $this->film->getName(),
-            'Дата' => $this->dateTimeStartMovieSession->format('d F Y'),
-            'Время начала сеанса' => $this->dateTimeStartMovieSession->format('H:i'),
-            'Продолжительность фильма' => $this->getDuration(),
-            'Время окончания сеанса' => $this->getDateTimeEndMovieSession()->format('H:i'),
-            'Количество свободных мест' => $this->countOfTickets,
-        ];
     }
 
     /** @return array<int> */
@@ -68,6 +53,22 @@ final class MovieSession
         $dateTimeEndMovieSession->modify("+{$minutesToAdd} minutes");
 
         return $dateTimeEndMovieSession;
+    }
+
+    /** @return array<mixed>
+     *
+     * @todo method for test
+     */
+    public function getInfoAboutMovieSession(): array
+    {
+        return [
+            'Название фильма' => $this->film->getName(),
+            'Дата' => $this->dateTimeStartMovieSession->format('d F Y'),
+            'Время начала сеанса' => $this->dateTimeStartMovieSession->format('H:i'),
+            'Продолжительность фильма' => $this->getDuration(),
+            'Время окончания сеанса' => $this->getDateTimeEndMovieSession()->format('H:i'),
+            'Количество свободных мест' => $this->countOfTickets,
+        ];
     }
 
     private function ticketsSoldOut(): bool

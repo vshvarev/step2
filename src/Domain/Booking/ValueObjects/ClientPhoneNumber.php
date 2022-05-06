@@ -2,6 +2,8 @@
 
 namespace App\Domain\Booking\ValueObjects;
 
+use Exception;
+
 class ClientPhoneNumber
 {
     public function __construct(
@@ -18,6 +20,6 @@ class ClientPhoneNumber
             return $phoneNumber;
         }
 
-        return '----------';
+        throw new Exception('Некорректный номер телефона');
     }
 }

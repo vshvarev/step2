@@ -15,7 +15,7 @@ final class TicketList implements Iterator
 
     private int $pointer = 0;
 
-    public function addTicket(MovieSession $movieSession, Client $client, DateTimeInterface $dateTimeStart, DateTimeInterface $dateTimeEnd): void
+    public function soldTicket(MovieSession $movieSession, Client $client, DateTimeInterface $dateTimeStart, DateTimeInterface $dateTimeEnd): void
     {
         $this->tickets[] = new Ticket($movieSession, $client, $dateTimeStart, $dateTimeEnd);
     }

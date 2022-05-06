@@ -17,4 +17,4 @@ $client2 = new Client('Nastya', new ClientPhoneNumber('89087777777'));
 $filmShow1->bookTicket($client1);
 $filmShow1->bookTicket($client2);
 
-print_r($filmShow1->getInfoAboutFilmShow());
+print_r($filmShow1->getInfoAboutMovieSession());
