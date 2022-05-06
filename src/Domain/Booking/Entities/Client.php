@@ -16,14 +16,4 @@ final class Client
     ) {
         $this->id = Uuid::uuid4();
     }
-
-    private function getName(): string
-    {
-        return $this->name;
-    }
-
-    private function getPhoneNumber(): string
-    {
-        return $this->phoneNumber;
-    }
 }

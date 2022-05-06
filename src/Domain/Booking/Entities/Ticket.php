@@ -19,9 +19,4 @@ final class Ticket
     ) {
         $this->id = Uuid::uuid4();
     }
-
-    public function bookTicket(Client $client): void
-    {
-        $this->client = $client;
-    }
 }
