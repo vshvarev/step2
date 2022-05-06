@@ -7,7 +7,7 @@ use App\Domain\Booking\Ticket\ValueObject\Client;
 use App\Domain\Booking\Ticket\ValueObject\Film;
 use DateTime;
 
-final class FilmShow
+final class MovieSession
 {
     private DateTime $dateTimeStart;
     private DateTime $dateTimeEnd;
