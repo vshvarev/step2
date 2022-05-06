@@ -2,7 +2,6 @@
 
 namespace App\Domain\Booking\Entities;
 
-use App\Domain\Booking\ValueObjects\Client;
 use DateTimeInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

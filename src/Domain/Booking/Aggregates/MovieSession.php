@@ -3,8 +3,8 @@
 namespace App\Domain\Booking\Aggregates;
 
 use App\Domain\Booking\Collections\TicketList;
+use App\Domain\Booking\Entities\Client;
 use App\Domain\Booking\Entities\Film;
-use App\Domain\Booking\ValueObjects\Client;
 use DateTime;
 use DateTimeInterface;
 use Ramsey\Uuid\Uuid;
