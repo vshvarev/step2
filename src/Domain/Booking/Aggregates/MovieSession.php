@@ -32,7 +32,7 @@ final class MovieSession
             return;
         }
 
-        $this->tickets->addTicket($this->film, $client, $this->dateTimeStartMovieSession, $this->getDateTimeEndMovieSession());
+        $this->tickets->addTicket($this, $client, $this->dateTimeStartMovieSession, $this->getDateTimeEndMovieSession());
         $this->countOfTickets--;
     }
 

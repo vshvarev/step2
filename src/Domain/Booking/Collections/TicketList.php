@@ -2,8 +2,8 @@
 
 namespace App\Domain\Booking\Collections;
 
+use App\Domain\Booking\Aggregates\MovieSession;
 use App\Domain\Booking\Entities\Client;
-use App\Domain\Booking\Entities\Film;
 use App\Domain\Booking\Entities\Ticket;
 use DateTimeInterface;
 use Iterator;
@@ -15,9 +15,9 @@ final class TicketList implements Iterator
 
     private int $pointer = 0;
 
-    public function addTicket(Film $film, Client $client, DateTimeInterface $dateTimeStart, DateTimeInterface $dateTimeEnd): void
+    public function addTicket(MovieSession $movieSession, Client $client, DateTimeInterface $dateTimeStart, DateTimeInterface $dateTimeEnd): void
     {
-        $this->tickets[] = new Ticket($film, $client, $dateTimeStart, $dateTimeEnd);
+        $this->tickets[] = new Ticket($movieSession, $client, $dateTimeStart, $dateTimeEnd);
     }
 
     public function current(): Ticket
